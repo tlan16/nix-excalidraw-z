@@ -1,19 +1,22 @@
 {
-  description = "Nix package for ExcalidrawZ — Excalidraw app for macOS, powered by SwiftUI";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-excalidraw-z.url = "github:tlan16/nix-excalidraw-z";
   };
 
-  outputs = { self, nixpkgs }: let
+  outputs = { self, nixpkgs, home-manager, nix-excalidraw-z, ... }@inputs:
+  let
     system = "aarch64-darwin";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    packages.${system}.default = pkgs.callPackage ./package.nix {};
-
-    apps.${system}.default = {
-      type = "app";
-      program = "${self.packages.${system}.default}/Applications/ExcalidrawZ.app/Contents/MacOS/ExcalidrawZ";
+    homeConfigurations."frank.lan" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = { inherit inputs; };  # <-- pass inputs here
+      modules = [ ./home.nix ];
     };
   };
 }
