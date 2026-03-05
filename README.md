@@ -9,20 +9,20 @@ Nix flake packaging [ExcalidrawZ](https://github.com/chocoford/ExcalidrawZ) — 
 ### Run without installing
 
 ```sh
-nix run github:your-username/nix-excalidraw-z
+nix run github:tlan16/nix-excalidraw-z
 ```
 
 ### Install into a profile
 
 ```sh
-nix profile install github:your-username/nix-excalidraw-z
+nix profile install github:tlan16/nix-excalidraw-z
 ```
 
 ### Use in a `home-manager` or system flake
 
 ```nix
 {
-  inputs.nix-excalidraw-z.url = "github:your-username/nix-excalidraw-z";
+  inputs.nix-excalidraw-z.url = "github:tlan16/nix-excalidraw-z";
 
   # then reference the package:
   # nix-excalidraw-z.packages.aarch64-darwin.default
@@ -32,7 +32,7 @@ nix profile install github:your-username/nix-excalidraw-z
 ## Build locally
 
 ```sh
-git clone https://github.com/your-username/nix-excalidraw-z
+git clone https://github.com/tlan16/nix-excalidraw-z
 cd nix-excalidraw-z
 nix build
 open result/Applications/ExcalidrawZ.app
