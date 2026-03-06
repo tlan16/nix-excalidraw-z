@@ -6,26 +6,16 @@ Nix flake packaging [ExcalidrawZ](https://github.com/chocoford/ExcalidrawZ) — 
 
 ## Usage
 
-### Run without installing
-
-```sh
-nix run github:tlan16/nix-excalidraw-z
-```
-
-### Install into a profile
-
-```sh
-nix profile install github:tlan16/nix-excalidraw-z
-```
-
 ### Use in a `home-manager` or system flake
 
 ```nix
+let
+  nix-excalidraw-z = builtins.getFlake "github:tlan16/nix-excalidraw-z";
+in
 {
-  inputs.nix-excalidraw-z.url = "github:tlan16/nix-excalidraw-z";
-
-  # then reference the package:
-  # nix-excalidraw-z.packages.aarch64-darwin.default
+  home.packages = [
+    nix-excalidraw-z.packages.aarch64-darwin.default
+  ];
 }
 ```
 
